@@ -33,7 +33,7 @@ public class DoctorEntity {
 
 	//relationship bidirectional
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "address_id")
+	@JoinColumn(name = "address_id", nullable = false)
 	private AddressEntity address;
 
 	//relationship directional, parent
