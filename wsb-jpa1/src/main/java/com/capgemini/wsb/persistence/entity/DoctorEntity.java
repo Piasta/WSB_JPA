@@ -33,12 +33,12 @@ public class DoctorEntity {
 
 	//relationship bidirectional
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "address_id", nullable = false)
+	@JoinColumn(name = "address_id")
 	private AddressEntity address;
 
 	//relationship directional, parent
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "visit_id")
+	@JoinColumn(name = "doctor_id")
 	private List<VisitEntity> visits;
 
 	public Long getId() {

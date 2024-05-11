@@ -17,6 +17,10 @@ public class VisitEntity {
 	@Column(nullable = false)
 	private LocalDateTime time;
 
+	@ManyToOne
+	@PrimaryKeyJoinColumn
+	private DoctorEntity doctor;
+
 	public Long getId() {
 		return id;
 	}

@@ -37,7 +37,7 @@ public class PatientEntity {
 
 	//relationship directional, parent
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "visit_id")
+	@JoinColumn(name = "patient_id")
 	private List<VisitEntity> visits;
 
 	public Long getId() {
