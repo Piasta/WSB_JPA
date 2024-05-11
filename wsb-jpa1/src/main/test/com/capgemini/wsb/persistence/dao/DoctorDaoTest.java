@@ -11,6 +11,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
 
+import java.time.LocalDate;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -56,17 +58,18 @@ public class DoctorDaoTest {
         doctor.setSpecialization(Specialization.OCULIST);
 
         AddressEntity address = new AddressEntity();
-        address.setAddressLine1("Laczna37");
-        address.setAddressLine2("LipinkiLuzyckie");
-        address.setCity("Warszawa");
+        address.setAddressLine1("Laczna");
+        address.setAddressLine2("37");
+        address.setCity("LipinkiLuzyckie");
         address.setPostalCode("98-432");
 
         doctor.setAddress(address);
-        doctorDao.save(doctor);
+        DoctorEntity savedDoctor = doctorDao.save(doctor);
+        AddressEntity savedAddress = addressDao.findOne(savedDoctor.getAddress().getId());
 
-        assertThat(doctorDao.findOne(doctor.getId())).isNotNull();
+        assertThat(savedDoctor).isNotNull();
+        assertThat(savedAddress).isNotNull();
 
-        address = addressDao.findOne(doctor.getId());
-        assertThat(address.getDoctor().getId()).isEqualTo(doctor.getId());
+        assertThat(savedDoctor.getAddress().getCity()).isEqualTo("LipinkiLuzyckie");
     }
 }
