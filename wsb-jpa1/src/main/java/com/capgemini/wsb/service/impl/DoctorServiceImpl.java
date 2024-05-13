@@ -22,6 +22,6 @@ public class DoctorServiceImpl implements DoctorService
     @Override
     public DoctorTO findById(Long id) {
         DoctorEntity entity = doctorDao.findOne(id);
-        return DoctorMapper.mapToTO(entity);
+        return DoctorMapper.mapToTo(entity);
     }
 }

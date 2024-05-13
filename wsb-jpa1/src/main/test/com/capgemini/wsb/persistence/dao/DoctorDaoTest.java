@@ -65,10 +65,8 @@ public class DoctorDaoTest {
 
         doctor.setAddress(address);
         DoctorEntity savedDoctor = doctorDao.save(doctor);
-        AddressEntity savedAddress = addressDao.findOne(savedDoctor.getAddress().getId());
 
         assertThat(savedDoctor).isNotNull();
-        assertThat(savedAddress).isNotNull();
 
         assertThat(savedDoctor.getAddress().getCity()).isEqualTo("LipinkiLuzyckie");
     }

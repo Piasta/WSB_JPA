@@ -1,5 +1,7 @@
 package com.capgemini.wsb.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,10 +22,12 @@ public class AddressEntity {
 
 	//relationship bidirectional
 	@OneToOne(mappedBy = "address")
+	@JsonIgnore
 	private DoctorEntity doctor;
 
 	//relationship bidirectional
 	@OneToOne(mappedBy = "address")
+	@JsonIgnore
 	private PatientEntity patient;
 
 	public Long getId() {

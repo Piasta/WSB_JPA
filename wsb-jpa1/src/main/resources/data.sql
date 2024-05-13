@@ -17,3 +17,6 @@ INSERT INTO PATIENT (date_of_birth, email, first_name, last_name, patient_number
 
 INSERT INTO VISIT (DESCRIPTION, TIME, DOCTOR_ID, PATIENT_ID, TREATMENT_ID)
             VALUES ('Ultrasonography', '2024-05-10 10:00:00', 1, 1, 1);
+
+INSERT INTO VISIT (DESCRIPTION, TIME, DOCTOR_ID, PATIENT_ID, TREATMENT_ID)
+            VALUES ('Ultrasonography', '2024-05-14 10:00:00', 1, 1, 2);

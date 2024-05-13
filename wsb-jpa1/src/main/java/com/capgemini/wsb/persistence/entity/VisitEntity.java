@@ -1,5 +1,7 @@
 package com.capgemini.wsb.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDateTime;
 
 import javax.persistence.*;
@@ -18,7 +20,8 @@ public class VisitEntity {
 	private LocalDateTime time;
 
 	@ManyToOne
-	@PrimaryKeyJoinColumn
+	@JsonIgnore
+	@JoinColumn(name = "doctor_id")
 	private DoctorEntity doctor;
 
 	public Long getId() {
@@ -45,4 +48,11 @@ public class VisitEntity {
 		this.time = time;
 	}
 
+	public DoctorEntity getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(DoctorEntity doctor) {
+		this.doctor = doctor;
+	}
 }
