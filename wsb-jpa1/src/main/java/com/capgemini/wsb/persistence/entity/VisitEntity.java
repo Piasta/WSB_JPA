@@ -20,9 +20,10 @@ public class VisitEntity {
 	private LocalDateTime time;
 
 	@ManyToOne
-	@JsonIgnore
-	@JoinColumn(name = "doctor_id")
 	private DoctorEntity doctor;
+
+	@ManyToOne
+	private PatientEntity patient;
 
 	public Long getId() {
 		return id;
@@ -54,5 +55,13 @@ public class VisitEntity {
 
 	public void setDoctor(DoctorEntity doctor) {
 		this.doctor = doctor;
+	}
+
+	public PatientEntity getPatient() {
+		return patient;
+	}
+
+	public void setPatient(PatientEntity patient) {
+		this.patient = patient;
 	}
 }

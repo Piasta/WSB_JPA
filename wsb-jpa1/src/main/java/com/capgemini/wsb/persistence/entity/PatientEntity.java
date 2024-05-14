@@ -1,5 +1,8 @@
 package com.capgemini.wsb.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -35,9 +38,10 @@ public class PatientEntity {
 	@JoinColumn(name = "address_id")
 	private AddressEntity address;
 
-	//relationship directional, parent
+	//relationship bidirectional
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "patient_id")
+	@JsonBackReference
 	private List<VisitEntity> visits;
 
 	public Long getId() {

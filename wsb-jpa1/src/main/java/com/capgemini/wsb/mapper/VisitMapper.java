@@ -14,6 +14,7 @@ public final class VisitMapper {
         visitTO.setDescription(visitEntity.getDescription());
         visitTO.setTime(visitEntity.getTime());
         visitTO.setDoctor(visitEntity.getDoctor());
+        visitTO.setPatient(visitEntity.getPatient());
         return visitTO;
     }
 
@@ -25,6 +26,8 @@ public final class VisitMapper {
         visitEntity.setId(visitTO.getId());
         visitEntity.setDescription(visitTO.getDescription());
         visitEntity.setTime(visitTO.getTime());
+        visitEntity.setDoctor(visitTO.getDoctor());
+        visitEntity.setPatient(visitTO.getPatient());
         return visitEntity;
     }
 }

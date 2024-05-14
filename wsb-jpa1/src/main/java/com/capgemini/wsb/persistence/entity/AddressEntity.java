@@ -69,20 +69,4 @@ public class AddressEntity {
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
-
-	public DoctorEntity getDoctor() {
-		return doctor;
-	}
-
-	public void setDoctor(DoctorEntity doctor) {
-		this.doctor = doctor;
-	}
-
-	public PatientEntity getPatient() {
-		return patient;
-	}
-
-	public void setPatient(PatientEntity patient) {
-		this.patient = patient;
-	}
 }

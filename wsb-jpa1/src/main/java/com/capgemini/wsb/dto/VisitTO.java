@@ -2,6 +2,7 @@ package com.capgemini.wsb.dto;
 
 import com.capgemini.wsb.persistence.entity.AddressEntity;
 import com.capgemini.wsb.persistence.entity.DoctorEntity;
+import com.capgemini.wsb.persistence.entity.PatientEntity;
 import com.capgemini.wsb.persistence.entity.VisitEntity;
 
 import javax.persistence.*;
@@ -19,6 +20,16 @@ public class VisitTO implements Serializable {
     private LocalDateTime time;
 
     private DoctorEntity doctor;
+
+    private PatientEntity patient;
+
+    public PatientEntity getPatient() {
+        return patient;
+    }
+
+    public void setPatient(PatientEntity patient) {
+        this.patient = patient;
+    }
 
     public DoctorEntity getDoctor() {
         return doctor;

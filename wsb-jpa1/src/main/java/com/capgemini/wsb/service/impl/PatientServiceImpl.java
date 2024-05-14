@@ -11,6 +11,7 @@ import com.capgemini.wsb.persistence.dao.impl.DoctorDaoImpl;
 import com.capgemini.wsb.persistence.entity.DoctorEntity;
 import com.capgemini.wsb.persistence.entity.PatientEntity;
 import com.capgemini.wsb.persistence.entity.VisitEntity;
+import com.capgemini.wsb.rest.exception.EntityNotFoundException;
 import com.capgemini.wsb.service.DoctorService;
 import com.capgemini.wsb.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,26 +42,31 @@ public class PatientServiceImpl implements PatientService
     @Override
     public PatientTO listPastVisits(Long id) {
         final PatientEntity patientEntity = patientDao.findOne(id);
-        DoctorDao doctorDao = new DoctorDaoImpl();
 
         if (patientEntity != null) {
             List<VisitEntity> allVisits = patientEntity.getVisits();
             List<VisitEntity> pastVisits = new ArrayList<>();
-            List<DoctorEntity> doctors = new ArrayList<>();
             LocalDate currentDate = LocalDate.now();
             for (VisitEntity visit : allVisits) {
                 if (visit.getTime().toLocalDate().isBefore(currentDate)) {
                     pastVisits.add(visit);
-                    DoctorEntity doctorEntity = visit.getDoctor();
-                    doctors.add(doctorEntity);
                 }
             }
             PatientTO patientTO = PatientMapper.mapToTo(patientEntity);
             patientTO.setVisits(pastVisits);
-            patientTO.setDoctor(doctors);
 
             return patientTO;
         }
         return null;
+    }
+
+    @Override
+    public void delete(Long id) {
+        final PatientEntity entity = patientDao.findOne(id);
+        if (entity != null) {
+            patientDao.delete(entity);
+        } else {
+            throw new EntityNotFoundException(id);
+        }
     }
 }
