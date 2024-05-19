@@ -4,5 +4,5 @@ import com.capgemini.wsb.dto.AddressTO;
 
 public interface AddressService
 {
-    public AddressTO findById(final Long id);
+    AddressTO findById(final Long id);
 }

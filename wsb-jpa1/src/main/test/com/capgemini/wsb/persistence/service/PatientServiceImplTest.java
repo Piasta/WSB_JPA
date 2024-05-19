@@ -1,80 +1,72 @@
 package com.capgemini.wsb.persistence.service;
 
+import com.capgemini.wsb.dto.AddressTO;
+import com.capgemini.wsb.dto.DoctorTO;
 import com.capgemini.wsb.dto.PatientTO;
-import com.capgemini.wsb.persistence.dao.AddressDao;
-import com.capgemini.wsb.persistence.dao.DoctorDao;
-import com.capgemini.wsb.persistence.dao.PatientDao;
-import com.capgemini.wsb.persistence.dao.VisitDao;
-import com.capgemini.wsb.persistence.entity.AddressEntity;
-import com.capgemini.wsb.persistence.entity.DoctorEntity;
-import com.capgemini.wsb.persistence.entity.PatientEntity;
-import com.capgemini.wsb.persistence.entity.VisitEntity;
+import com.capgemini.wsb.dto.VisitTO;
+import com.capgemini.wsb.service.impl.AddressServiceImpl;
+import com.capgemini.wsb.service.impl.DoctorServiceImpl;
 import com.capgemini.wsb.service.impl.PatientServiceImpl;
 import com.capgemini.wsb.service.impl.VisitServiceImpl;
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Collections;
+import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class PatientServiceImplTest {
 
-    @Mock
-    private PatientDao patientDao;
-
-    @Mock
-    private VisitDao visitDao;
-
-    @Mock
-    private DoctorDao doctorDao;
-
-    @Mock
-    private AddressDao addressDao;
-
-    @InjectMocks
+    @Autowired
     private PatientServiceImpl patientService;
 
-    @InjectMocks
+    @Autowired
     private VisitServiceImpl visitService;
 
-    @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-    }
+    @Autowired
+    private DoctorServiceImpl doctorService;
 
-    @Test
-    public void testCascadeDelete() {
-
-    }
+    @Autowired
+    private AddressServiceImpl addressService;
 
     @Test
     public void testFindPatientById() {
-        // given
-        Long patientId = 1L;
-        String firstName = "Sprytny";
-        String lastName = "Johny";
+        PatientTO patient = patientService.findById(1L);
+        assertThat(patient).isNotNull();
+        assertThat(patient.getFirstName()).isEqualTo("Zuzanna");
+    }
 
-        PatientEntity patientEntity = new PatientEntity();
-        patientEntity.setId(patientId);
-        patientEntity.setFirstName(firstName);
-        patientEntity.setLastName(lastName);
+    @Transactional
+    @Test
+    public void testCascadeDelete() {
+        PatientTO patient = patientService.findById(1L);
+        VisitTO visit = visitService.findById(1L);
+        DoctorTO doctor = doctorService.findById(1L);
+        AddressTO address = addressService.findById(2L);
 
-        // when
-        when(patientDao.findOne(patientId)).thenReturn(patientEntity);
+        assertThat(patient).isNotNull();
+        assertThat(visit).isNotNull();
+        assertThat(doctor).isNotNull();
+        assertThat(address).isNotNull();
 
-        PatientTO patientTO = patientService.findById(patientId);
+        patientService.delete(1L);
 
-        // then
-        assertThat(patientTO).isNotNull();
-        assertThat(patientTO.getId()).isEqualTo(patientId);
-        assertThat(patientTO.getFirstName()).isEqualTo(firstName);
-        assertThat(patientTO.getLastName()).isEqualTo(lastName);
+        assertThat(patientService.findById(1L)).isNull();
+        assertThat(visitService.findById(1L)).isNull();
+        assertThat(doctorService.findById(1L)).isNotNull();
+        assertThat(addressService.findById(2L)).isNull();
+    }
+
+    @Test
+    public void testShouldFindAllVisitsByPatientId() {
+        PatientTO patientVisits = patientService.listAllVisits(1L);
+        assertThat(patientVisits).isNotNull();
+        assertThat(patientVisits.getVisits()).isNotNull();
+        assertThat(patientVisits.getVisits().size()).isEqualTo(2);
     }
 }

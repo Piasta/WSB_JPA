@@ -4,5 +4,5 @@ import com.capgemini.wsb.dto.DoctorTO;
 
 public interface DoctorService
 {
-    public DoctorTO findById(final Long id);
+    DoctorTO findById(final Long id);
 }

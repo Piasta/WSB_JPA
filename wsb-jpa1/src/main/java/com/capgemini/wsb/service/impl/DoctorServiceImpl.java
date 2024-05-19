@@ -2,7 +2,6 @@ package com.capgemini.wsb.service.impl;
 
 import com.capgemini.wsb.dto.DoctorTO;
 import com.capgemini.wsb.mapper.DoctorMapper;
-import com.capgemini.wsb.persistence.dao.AddressDao;
 import com.capgemini.wsb.persistence.dao.DoctorDao;
 import com.capgemini.wsb.persistence.entity.DoctorEntity;
 import com.capgemini.wsb.service.DoctorService;

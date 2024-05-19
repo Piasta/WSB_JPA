@@ -20,3 +20,12 @@ INSERT INTO VISIT (DESCRIPTION, TIME, DOCTOR_ID, PATIENT_ID, TREATMENT_ID)
 
 INSERT INTO VISIT (DESCRIPTION, TIME, DOCTOR_ID, PATIENT_ID, TREATMENT_ID)
             VALUES ('Ultrasonography', '2024-05-14 10:00:00', 1, 1, 2);
+
+INSERT INTO PATIENT (date_of_birth, email, first_name, last_name, patient_number, telephone_number)
+            VALUES ('1999-01-01', 'a@wp.pl', 'Zygfryd', 'Piasta', '333', '555333222');
+
+INSERT INTO PATIENT (date_of_birth, email, first_name, last_name, patient_number, telephone_number)
+            VALUES ('1975-01-01', 'b@wp.pl', 'Bonifacy', 'Piasta', '333', '555333222');
+
+INSERT INTO VISIT (DESCRIPTION, TIME, DOCTOR_ID, PATIENT_ID, TREATMENT_ID)
+            VALUES ('Ultrasonography', '2024-05-14 10:00:00', 1, 2, 2);

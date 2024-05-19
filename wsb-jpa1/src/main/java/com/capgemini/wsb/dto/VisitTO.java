@@ -1,15 +1,10 @@
 package com.capgemini.wsb.dto;
 
-import com.capgemini.wsb.persistence.entity.AddressEntity;
 import com.capgemini.wsb.persistence.entity.DoctorEntity;
 import com.capgemini.wsb.persistence.entity.PatientEntity;
-import com.capgemini.wsb.persistence.entity.VisitEntity;
 
-import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class VisitTO implements Serializable {
 

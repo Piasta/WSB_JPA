@@ -1,7 +1,6 @@
 package com.capgemini.wsb.mapper;
 
 import com.capgemini.wsb.dto.DoctorTO;
-import com.capgemini.wsb.persistence.entity.AddressEntity;
 import com.capgemini.wsb.persistence.entity.DoctorEntity;
 
 public final class DoctorMapper

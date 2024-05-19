@@ -6,6 +6,8 @@ public interface PatientService
 {
     PatientTO findById(final Long id);
 
+    PatientTO listAllVisits(final Long id);
+
     PatientTO listPastVisits(final Long id);
 
     void delete (final Long id);
